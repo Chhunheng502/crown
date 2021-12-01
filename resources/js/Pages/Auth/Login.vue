@@ -40,6 +40,10 @@
                 </jet-button>
             </div>
         </form>
+
+        <Link :href="route('register')" class="underline text-sm text-gray-600 hover:text-gray-900">
+            Forgot your password?
+        </Link>
     </jet-authentication-card>
 </template>
 
