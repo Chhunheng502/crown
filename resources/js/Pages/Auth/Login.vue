@@ -36,13 +36,13 @@
                 </Link>
 
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
+                    Log in2
                 </jet-button>
             </div>
         </form>
 
         <Link :href="route('register')" class="underline text-sm text-gray-600 hover:text-gray-900">
-            Forgot your password?
+            Create an account
         </Link>
     </jet-authentication-card>
 </template>
