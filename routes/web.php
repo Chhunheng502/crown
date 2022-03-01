@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-use Laravel\Jetstream\Http\Controllers\Inertia\UserProfileController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -113,6 +111,4 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
 
         return ['status' => 'success'];
     });
-
-    Route::get('/user/setting', [UserProfileController::class, 'setting'])->name('profile.setting');
 });
