@@ -86,11 +86,12 @@ export default defineComponent({
 
     created() {
         this.fetchRepliedComments()
+        console.log(this.user.id);
     },
 
     methods: {
         editComment() {
-            axios.post('/editComment', {comment_id: this.comment.id, content: this.content})
+            axios.put(`/comments/${this.comment.id}`, {content: this.content})
             .then(response => {
                 console.log(response.data);
             });

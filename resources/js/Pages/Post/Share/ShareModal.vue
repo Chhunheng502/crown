@@ -58,7 +58,7 @@ export default defineComponent({
         },
 
         sharePost() {
-            axios.post('/sharePost', {post_id: this.post.id, content: this.shareContent}).then(response => {
+            axios.post('/shares', {post_id: this.post.id, content: this.shareContent}).then(response => {
                 console.log(response.data);
 
                 window.location.reload();

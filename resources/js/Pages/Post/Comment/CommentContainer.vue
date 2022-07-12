@@ -67,7 +67,7 @@ export default defineComponent({
                 formData.append('share_id', this.share_id);
             }
 
-            axios.post('/storeComment', formData).then(response => {
+            axios.post('/comments', formData).then(response => {
                 this.comments.push(response.data[0]);
             });
 
@@ -82,7 +82,7 @@ export default defineComponent({
         deleteComment(comment) {
             this.comments.splice(this.comments.findIndex(item => item.id == comment.id), 1);
 
-            axios.post('/deleteComment', {comment_id: comment.id})
+            axios.delete(`/comments/${comment.id}`)
             .then(response => {
                 console.log(response.data);
             });

@@ -102,7 +102,7 @@ export default defineComponent({
         },
 
         editShare() {
-            axios.post('/editShare', {share_id: this.share.id, content: this.content}).then(response => {
+            axios.put(`/shares/${this.share.id}`, {content: this.content}).then(response => {
                 console.log(response.data);
 
                 this.showModal = false;
@@ -110,7 +110,7 @@ export default defineComponent({
         },
 
         deleteShare() {
-            axios.post('/deleteShare', {share_id: this.share.id}).then(response => {
+            axios.delete(`/shares/${this.share.id}`).then(response => {
                 console.log(response.data);
 
                 window.location.reload();

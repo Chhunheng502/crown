@@ -4,49 +4,46 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Share;
-use App\Notifications\Share as NotificationsShare;
+use App\Repositories\PostRepository;
+use App\Repositories\ShareRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
 
 class ShareController extends Controller
 {
-    public function fetchShares(Request $request)
-    {
-        $shares = Post::find($request->post_id)->shares->count();
+    protected $shareRepository;
+    protected $postRepository;
 
-        return $shares;
+    public function __construct(
+        ShareRepository $shareRepository,
+        PostRepository $postRepository
+    )
+    {
+        $this->shareRepository = $shareRepository;
+        $this->postRepository = $postRepository;
     }
 
-    public function sharePost(Request $request)
+    public function countShares($post_id)
     {
-        $share = new Share();
+        return $this->postRepository->getbyId($post_id)->shares->count();
+    }
 
-        $share->user_id = Auth::id();
-        $share->post_id = $request->post_id;
-        $share->content = $request->content;
-
-        $share->save();
-
-        Notification::send(Post::find($request->post_id)->author, new NotificationsShare($share->id));
+    public function store(Request $request)
+    {
+        $this->shareRepository->create($request);
 
         return ['status' => 'success'];
     }
 
-    public function editShare(Request $request)
+    public function update($id, Request $request)
     {
-        $share = Share::find($request->share_id);
-
-        $share->content = $request->content;
-
-        $share->save();
+        $this->shareRepository->update($id, $request);
 
         return ['status' => 'success'];
     }
 
-    public function deleteShare(Request $request)
+    public function delete($id)
     {
-        Share::find($request->share_id)->delete();
+        $this->shareRepository->delete($id);
 
         return ['status' => 'success'];
     }

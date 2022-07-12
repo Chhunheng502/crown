@@ -2,53 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use App\Models\Share;
+use App\Repositories\PostRepository;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function fetchPosts($initialVal, $endVal)
+    protected $postRepository;
+
+    public function __construct(PostRepository $postRepository)
     {
-        return Post::getLatestPosts($initialVal, $endVal);
+        $this->postRepository = $postRepository;
     }
 
-    public function fetchUserPosts(Request $request)
+    public function getAllPosts($initialVal, $endVal)
     {
-        $posts = Post::with('author')->where('user_id', $request->user_id)->get();
-
-        $shares = Share::with('user', 'post.author')->where('user_id', $request->user_id)->get();
-
-        return [...$posts, ...$shares];
+        return $this->postRepository->getAllLatest($initialVal, $endVal);
     }
 
-    public function createPost(Request $request)
+    public function getUserPosts($user_id)
     {
-        $post = new Post();
+        return $this->postRepository->getUserLatest($user_id);
+    }
 
-        $post->user_id = $request->user_id;
-        $post->content = $request->content;
-        $post->photo = $request->file('photo')?->store('images', ['disk' => 'public']);
-
-        $post->save();
+    public function store(Request $request)
+    {
+        $this->postRepository->create($request);
 
         return ['status' => 'success'];
     }
 
-    public function editPost(Request $request)
+    public function update($id, Request $request)
     {
-        $post = Post::find($request->post_id);
-
-        $post->content = $request->content;
-
-        $post->save();
+        $this->postRepository->update($id, $request);
 
         return ['status' => 'success'];
     }
 
-    public function deletePost(Request $request)
+    public function destroy($id)
     {
-        Post::find($request->post_id)->delete();
+        $this->postRepository->delete($id);
 
         return ['status' => 'success'];
     }

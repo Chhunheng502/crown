@@ -5,57 +5,40 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Notifications\Comment as NotificationsComment;
+use App\Repositories\CommentRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 
 class CommentController extends Controller
 {
-    public function fetchComments(Request $request)
+    protected $commentRepository;
+
+    public function __construct(CommentRepository $commentRepository)
     {
-        return Comment::with('user')
-                        ->where('post_id', $request->post_id ?? -1)
-                        ->orWhere('share_id', $request->share_id ?? -1)
-                        ->get();
+        $this->commentRepository = $commentRepository;
     }
 
-    public function storeComment(Request $request)
+    public function getComments(Request $request)
     {
-        $comment = new Comment();
-
-        $comment->user_id = Auth::id();
-        $comment->post_id = $request->post_id;
-        $comment->share_id = $request->share_id;
-        $comment->content = $request->content;
-
-        $comment->save();
-
-        if(Auth::id() !== Post::find($request->post_id)->author->id)
-        {
-            Notification::send(Post::find($request->post_id)->author, new NotificationsComment($request->post_id));
-        }
-
-        return Comment::with('user')
-                        ->where('id', $comment->id)
-                        ->get();
+        return $this->commentRepository->getComments($request);
     }
 
-    public function deleteComment(Request $request)
+    public function store(Request $request)
     {
-        $comment = Comment::find($request->comment_id);
+       return $this->commentRepository->create($request);
+    }
 
-        $comment->delete();
+    public function update($id, Request $request)
+    {
+        $this->commentRepository->update($id, $request);
 
         return ['status' => 'success'];
     }
 
-    public function editComment(Request $request)
+    public function delete($id)
     {
-        $comment = Comment::find($request->comment_id);
-
-        $comment->content = $request->content;
-
-        $comment->save();
+        $this->commentRepository->delete($id);
 
         return ['status' => 'success'];
     }

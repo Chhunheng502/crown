@@ -63,7 +63,7 @@ export default defineComponent({
     created() {
         this.fetchLikes();
         this.isLiked();
-        this.fetchShares();
+        this.fetchCountShares();
     },
 
     computed: {
@@ -114,8 +114,8 @@ export default defineComponent({
             });
         },
 
-        fetchShares() {
-            axios.post('/fetchShares', {post_id: this.post.id}).then(response => {
+        fetchCountShares() {
+            axios.get(`/fetchCountShares/${this.post.id}`).then(response => {
                 this.numOfShares = response.data;
             });
         }

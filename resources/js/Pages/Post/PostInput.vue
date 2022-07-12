@@ -90,7 +90,7 @@ export default defineComponent({
             formData.append('content', this.content);
             formData.append('photo', this.fileUpload);
 
-            axios.post('/createPost', formData, config)
+            axios.post('/posts', formData, config)
             .then(response => {
                 console.log(response.data);
 

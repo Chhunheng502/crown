@@ -96,7 +96,7 @@ export default defineComponent({
         },
 
         editPost() {
-            axios.post('/editPost', {post_id: this.post.id, content: this.content}).then(response => {
+            axios.put(`/posts/${this.post.id}`, {content: this.content}).then(response => {
                 console.log(response.data);
 
                 this.showModal = false;
@@ -104,7 +104,7 @@ export default defineComponent({
         },
 
         deletePost() {
-            axios.post('/deletePost', {post_id: this.post.id}).then(response => {
+            axios.delete(`/posts/${this.post.id}`).then(response => {
                 console.log(response.data);
 
                 window.location.reload();

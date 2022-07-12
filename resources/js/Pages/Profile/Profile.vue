@@ -216,7 +216,7 @@ export default defineComponent({
 
     methods: {
         fetchUserPosts() {
-            axios.post('/fetchUserPosts', {user_id: this.friend.id}).then(response => {
+            axios.get(`/fetchUserPosts/${this.friend.id}`).then(response => {
                 this.data = response.data;
 
                 if(this.searchPost_ID !== null)

@@ -31,36 +31,6 @@ class Post extends Model
         return $this->hasMany(Share::class);
     }
 
-    public static function getLatestPosts($initialVal, $endVal)
-    {
-        $latest_posts = [];
-
-        $user_posts = Post::where('user_id', Auth::id())->with('author')->get();
-
-        $user_shares = Share::with('user', 'post.author')
-                                ->where('user_id', Auth::id())
-                                ->get();
-
-        $latest_posts = [...$user_posts, ...$user_shares];
-
-        $friends = FriendShip::where('user_id', Auth::id())
-                                ->orWhere('user2_id', Auth::id())
-                                ->get();
-
-        foreach($friends as $friend)
-        {
-            $friend_id = Auth::id() == $friend->user_id ? $friend->user2_id : $friend->user_id;
-
-            $friend_posts = Post::where('user_id', $friend_id)->with('author')->get();
-
-            $friend_shares = Share::where('user_id', $friend_id)->with('user', 'post.author')->get();
-
-            $latest_posts = [...$latest_posts, ...$friend_posts, ...$friend_shares];
-        }
-
-        return array_splice($latest_posts, $initialVal, $endVal);
-    }
-
     public function getCreatedAtAttribute($created_at)
     {
         return Carbon::createFromTimeStamp(strtotime($created_at) )->diffForHumans();

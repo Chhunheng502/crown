@@ -5,7 +5,7 @@ use App\Http\Controllers\CommentReplyController;
 use App\Http\Controllers\FriendshipController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\PrivateMsgController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ShareController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -52,31 +52,33 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::post('/acceptFriendRequest', [FriendshipController::class, 'acceptFriendRequest']);
     Route::post('/deleteFriendRequest', [FriendshipController::class, 'deleteFriendRequest']);
 
-    Route::get('/fetchPosts/{initialVal}/{endVal}', [PostController::class, 'fetchPosts']);
-    Route::post('/fetchUserPosts', [PostController::class, 'fetchUserPosts']);
-    Route::post('/createPost', [PostController::class, 'createPost']);
-    Route::post('/editPost', [PostController::class, 'editPost']);
-    Route::post('/deletePost', [PostController::class, 'deletePost']);
+    // might need some change
+    Route::get('/fetchPosts/{initialVal}/{endVal}', [PostController::class, 'getAllPosts']);
+    Route::get('/fetchUserPosts/{user_id}', [PostController::class, 'getUserPosts']);
+    Route::post('/posts', [PostController::class, 'store']);
+    Route::put('/posts/{id}', [PostController::class, 'update']);
+    Route::delete('/posts/{id}', [PostController::class, 'destroy']);
 
-    Route::post('/fetchShares', [ShareController::class, 'fetchShares']);
-    Route::post('/sharePost', [ShareController::class, 'sharePost']);
-    Route::post('/editShare', [ShareController::class, 'editShare']);
-    Route::post('/deleteShare', [ShareController::class, 'deleteShare']);
+    Route::get('/fetchCountShares/{post_id}', [ShareController::class, 'countShares']);
+    Route::post('/shares', [ShareController::class, 'store']);
+    Route::put('/shares/{id}', [ShareController::class, 'update']);
+    Route::delete('/shares/{id}', [ShareController::class, 'delete']);
 
-    Route::get('/chat', [PrivateMsgController::class, 'index'])->name('chat');
-    Route::post('/createChat', [PrivateMsgController::class, 'createChat']);
-    Route::post('/fetchMessages', [PrivateMsgController::class, 'fetchMessages']);
-    Route::post('/sendMessage', [PrivateMsgController::class, 'sendMessage']);
+    Route::get('/chats', [ChatController::class, 'index'])->name('chat');
+    Route::post('/chats', [ChatController::class, 'store']);
+    Route::get('/fetchMessages/{user_id}', [ChatController::class, 'getMessages']);
+    Route::post('/sendMessage', [ChatController::class, 'sendMessage']);
 
-    Route::post('/fetchLikes', [LikeController::class, 'fetchLikes']);
-    Route::post('/likePost', [LikeController::class, 'likePost']);
-    Route::post('/unlikePost', [LikeController::class, 'unlikePost']);
+    // need adjustment to the frontend design
+    Route::post('/fetchLikes', [LikeController::class, 'getLikes']);
     Route::post('/isLiked', [LikeController::class, 'isLiked']);
+    Route::post('/likePost', [LikeController::class, 'store']);
+    Route::post('/unlikePost', [LikeController::class, 'destroy']);
 
-    Route::post('fetchComments', [CommentController::class, 'fetchComments']);
-    Route::post('storeComment', [CommentController::class, 'storeComment']);
-    Route::post('deleteComment', [CommentController::class, 'deleteComment']);
-    Route::post('editComment', [CommentController::class, 'editComment']);
+    Route::post('/fetchComments', [CommentController::class, 'getComments']);
+    Route::post('/comments', [CommentController::class, 'store']);
+    Route::put('/comments/{id}', [CommentController::class, 'update']);
+    Route::delete('/comments/{id}', [CommentController::class, 'delete']);
 
     Route::post('/fetchRepliedComments', [CommentReplyController::class, 'fetchRepliedComments']);
     Route::post('/replyComment', [CommentReplyController::class, 'replyComment']);

@@ -88,7 +88,7 @@
 
         methods: {
             fetchMessages() {
-                axios.post('/fetchMessages', {id: localStorage.getItem('chatKey')}).then(response => {
+                axios.get(`/fetchMessages/${localStorage.getItem('chatKey')}`).then(response => {
                     if(response.data.length > 0)
                     {
                         if(this.from_user.id === response.data[0].sender.id) {
@@ -124,7 +124,7 @@
             },
 
             createChat() {
-                axios.post('/createChat', {friend_id: localStorage.getItem('chatKey')}).then(response => {
+                axios.post('/chats', {friend_id: localStorage.getItem('chatKey')}).then(response => {
                     console.log(response.data);
 
                     window.location.reload();
