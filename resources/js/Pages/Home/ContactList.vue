@@ -70,7 +70,7 @@ export default defineComponent({
         gotoChat(friend_id) {
             localStorage.setItem('chatKey', friend_id);
 
-            window.location.href = '/chat';
+            window.location.href = '/chats';
         },
 
         // checkBreakPoint() {

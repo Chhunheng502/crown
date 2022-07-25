@@ -46,6 +46,10 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $user->detail()->create([
+            'gender' => $request->isFemale ? 'Female' : 'Male'
+        ]);
+
         event(new Registered($user));
 
         Auth::login($user);

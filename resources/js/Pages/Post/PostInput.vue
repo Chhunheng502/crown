@@ -39,7 +39,7 @@ import axios from 'axios'
 import CrownProfileImage from '@/Components/ProfileImage.vue'
 import CrownInput from '@/Components/Input.vue'
 import CrownFileInput from '@/Components/FileInput.vue'
-import JetDialogModal from '@/Jetstream/DialogModal.vue'
+import JetDialogModal from '@/Breeze/DialogModal.vue'
 import CrownTextarea from '@/Components/Textarea.vue'
 import CrownButton from '@/Components/Button.vue';
 

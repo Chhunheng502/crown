@@ -29,7 +29,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import JetDialogModal from '@/Jetstream/DialogModal.vue'
+import JetDialogModal from '@/Breeze/DialogModal.vue'
 import CrownTextarea from '@/Components/Textarea.vue'
 import ProfileCard from '@/Components/ProfileCard.vue'
 import CrownImage from '@/Components/Image.vue'

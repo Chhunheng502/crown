@@ -24,6 +24,13 @@
             <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
         </div>
 
+        <div class="mt-4">
+            <label class="flex items-center">
+                <BreezeCheckbox name="remember" v-model:checked="form.isFemale" />
+                <span class="ml-2 text-gray-600">I am a female</span>
+            </label>
+        </div>
+
         <div class="flex items-center justify-end mt-4">
             <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
                 Already registered?
@@ -41,6 +48,7 @@ import BreezeButton from '@/Breeze/Button.vue'
 import BreezeGuestLayout from '@/Layouts/Guest.vue'
 import BreezeInput from '@/Breeze/Input.vue'
 import BreezeLabel from '@/Components/Label.vue'
+import BreezeCheckbox from '@/Breeze/Checkbox.vue'
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
 import { Head, Link } from '@inertiajs/inertia-vue3';
 
@@ -51,6 +59,7 @@ export default {
         BreezeButton,
         BreezeInput,
         BreezeLabel,
+        BreezeCheckbox,
         BreezeValidationErrors,
         Head,
         Link,
@@ -63,6 +72,7 @@ export default {
                 email: '',
                 password: '',
                 password_confirmation: '',
+                isFemale: false,
                 terms: false,
             })
         }

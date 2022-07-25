@@ -55,7 +55,7 @@ import axios from 'axios'
 import PostLayout from '@/Layouts/PostLayout.vue'
 import ProfileCard from '@/Components/ProfileCard.vue'
 import Popover from '@/Components/Popover.vue'
-import JetDialogModal from '@/Jetstream/DialogModal.vue'
+import JetDialogModal from '@/Breeze/DialogModal.vue'
 import CrownTextarea from '@/Components/Textarea.vue'
 import CrownImage from '@/Components/Image.vue'
 import CrownButton from '@/Components/Button.vue';

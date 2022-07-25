@@ -152,7 +152,7 @@ import CrownButton from '@/Components/Button.vue'
 import SectionLayout from '@/Layouts/SectionLayout.vue'
 import PostCard from '../Post/PostCard.vue'
 import ShareCard from '../Post/Share/ShareCard.vue'
-import JetDialogModal from '@/Jetstream/DialogModal.vue'
+import JetDialogModal from '@/Breeze/DialogModal.vue'
 import EditModal from './EditModal.vue'
 
 export default defineComponent({

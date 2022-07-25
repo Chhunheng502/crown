@@ -28,7 +28,7 @@
 <script>
 import { defineComponent } from 'vue'
 import axios from 'axios'
-import JetDialogModal from '@/Jetstream/DialogModal'
+import JetDialogModal from '@/Breeze/DialogModal'
 import CrownInput from './Input.vue'
 import CrownProfileImage from './ProfileImage.vue'
 import CrownImage from './Image.vue';

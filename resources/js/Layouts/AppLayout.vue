@@ -10,8 +10,8 @@
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex-shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
-                                    <jet-application-mark class="block h-9 w-auto" />
+                                <Link :href="route('home')">
+                                    <BreezeApplicationLogo class="block h-9 w-auto" />
                                 </Link>
                             </div>
 
@@ -171,15 +171,15 @@
 
 <script>
     import { defineComponent } from 'vue'
-    import JetApplicationMark from '@/Jetstream/ApplicationMark.vue'
-    import JetNavLink from '@/Jetstream/NavLink.vue'
+    import BreezeApplicationLogo from '@/Breeze/ApplicationLogo.vue'
+    import JetNavLink from '@/Breeze/NavLink.vue'
     import Notifications from '@/Pages/Home/Notifications'
     import SearchModal from '@/Components/SearchModal.vue'
-    import JetDropdown from '@/Jetstream/Dropdown.vue'
-    import JetDropdownLink from '@/Jetstream/DropdownLink.vue'
+    import JetDropdown from '@/Breeze/Dropdown.vue'
+    import JetDropdownLink from '@/Breeze/DropdownLink.vue'
     import FriendRequests from '@/Pages/Home/FriendRequests.vue'
     import ContactList from '@/Pages/Home/ContactList.vue'
-    import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue'
+    import JetResponsiveNavLink from '@/Breeze/ResponsiveNavLink.vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
 
     export default defineComponent({
@@ -189,7 +189,7 @@
 
         components: {
             Head,
-            JetApplicationMark,
+            BreezeApplicationLogo,
             JetNavLink,
             Notifications,
             SearchModal,

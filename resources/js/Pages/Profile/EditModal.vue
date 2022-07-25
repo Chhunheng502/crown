@@ -38,7 +38,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import JetDialogModal from '@/Jetstream/DialogModal.vue';
+import JetDialogModal from '@/Breeze/DialogModal.vue';
 import CrownInput from '@/Components/Input.vue'
 import CrownButton from '@/Components/Button.vue';
 

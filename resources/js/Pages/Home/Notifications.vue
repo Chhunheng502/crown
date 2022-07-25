@@ -22,7 +22,7 @@
                                 <span class="font-bold"> {{ notification.name ?? notification.data.name }} </span>
                                 <span v-text="' ' + checkNotificationType(notification, 'getText')"> </span>
                             </h1>
-                            <p class="text-sm text-gray-400"> {{ notification.created_at ?? 'Just now' }} </p>
+                            <p class="text-sm text-gray-400"> {{ notification.created_at }} </p>
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
 <script>
 import { defineComponent } from 'vue'
 import axios from 'axios'
-import JetDropdown from '@/Jetstream/Dropdown.vue'
+import JetDropdown from '@/Breeze/Dropdown.vue'
 import CrownImage from '@/Components/Image.vue';
 
 export default defineComponent({
